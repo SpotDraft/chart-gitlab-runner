@@ -19,6 +19,12 @@ data:
     /entrypoint register --non-interactive \
       --url $GITLAB_URL \
       --executor kubernetes \
+      {{- if .Values.runners.runUntaggedJobs }}
+      --run-untagged \
+      {{- end }}
+      {{- if ne (len .Values.runners.tags) 0 }}
+      --tag-list {{ .Values.runners.tags | join "," | replace " " "_" }} \
+      {{- end }}
       --kubernetes-image {{ .Values.runners.image | quote }} \
       --kubernetes-privileged={{ if .Values.runners.privileged }}true{{ else }}false{{ end }} \
       --kubernetes-namespace {{ default .Release.Namespace .Values.runners.namespace }} \

@@ -60,6 +60,18 @@ runners:
   ##
   namespace: gitlab
 
+  ## Runner Tags to qualify this runner.
+  ## Typically you'll use these to identify unique qualities of a specific 
+  ## runner environment, e.g. supporting docker workloads (to build images), or
+  ## which provide particular resource constraints.
+  tags:  []
+
+  ## Run untagged jobs too?
+  ## When false, only jobs specifying one of the above tags will be processed by
+  ## this runner.
+  runUntaggedJobs: true
+
+
   ## Build Container specific configuration
   ##
   builds:
